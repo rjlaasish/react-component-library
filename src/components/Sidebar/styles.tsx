@@ -3,6 +3,7 @@ import styled from "styled-components"
 interface INav {
     isActive: boolean
 }
+
 interface IDropDownChildNav {
     isDropDownVisible: boolean
 }
@@ -23,13 +24,14 @@ export const NavWrapper = styled.ul`
   list-style-type: none;
   padding: 20px 0;
   border-bottom: 1px solid #920101;
-  
+
 `
 
 export const NavHeader = styled.div`
   color: #ffffff;
   padding: 40px 20px 20px 20px;
   background: #770101;
+  user-select: none;
 
   h3 {
     font-size: 27px;
@@ -47,17 +49,18 @@ export const DropDownNav = styled.li`
   color: #ffffff;
   width: 100%;
   padding: 3px 20px;
+  user-select: none;
 
-  
   &:hover {
     background-color: #770101;
     cursor: pointer;
-  } 
-  
+  }
+
   div {
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
+
     a {
       text-decoration: none;
       color: #ffffff;
@@ -76,33 +79,36 @@ export const NavItem = styled.li`
     cursor: pointer;
     background-color: #770101;
   }
-  
-    a {
-      padding: 5px 10px;
-      text-decoration: none;
-      color: #ffffff;
-      
-  }
 
+  a {
+    user-select: none;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #ffffff;
+
+  }
 `
 
 export const DropDownChildNav = styled.ul<IDropDownChildNav>`
   list-style-type: none;
   margin-left: -20px;
-  display: ${props => (props.isDropDownVisible ? "block" : "none")};;
-  
+  display: ${props => (props.isDropDownVisible ? "block" : "none")};
 
   li {
     padding: 5px 8px;
     border-left: 1px solid #ffffff;
+
     &:hover {
       background-color: #5a00009e;
     }
+
     a {
+      user-select: none;
       text-decoration: none;
       color: #ffffff;
     }
 
   }
-
 `
+
+

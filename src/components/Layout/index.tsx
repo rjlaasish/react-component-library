@@ -1,16 +1,20 @@
 import React from 'react';
 import Sidebar from "../Sidebar";
-import {LayoutWrapper} from "./styles";
+import {ChildrenWrapper, ContentWrapper, LayoutWrapper} from "./styles";
 
-interface ILayoutProps{
-    children?:  any;
+interface ILayoutProps {
+    children?: any;
 }
 
-function Layout({children}:ILayoutProps) {
+function Layout({children}: ILayoutProps) {
     return (
         <LayoutWrapper>
             <Sidebar/>
-            {children}
+            <ChildrenWrapper>
+                <ContentWrapper>
+                    {children}
+                </ContentWrapper>
+            </ChildrenWrapper>
         </LayoutWrapper>
     );
 }

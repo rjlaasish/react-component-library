@@ -1,9 +1,53 @@
-import React from 'react';
+import React from "react";
+import Input from "components/Input";
+import {CSelect} from "../../components/Input/selectv2";
+import {PhoneContainer} from "./styles";
 
-const PhoneInput:React.FC=()=> {
-    return (
-        <div>Hello World Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium asperiores aut, commodi consequatur corporis culpa distinctio et eveniet exercitationem expedita fugit harum id illo incidunt ipsum iusto laboriosam laborum magnam, magni maxime minima modi mollitia nemo nihil obcaecati omnis placeat praesentium quas qui quidem ratione reiciendis repellendus saepe, vero voluptatem voluptates! Accusamus aperiam architecto atque cumque debitis dolore explicabo facere fuga fugit labore nemo obcaecati, officiis optio porro quasi recusandae reprehenderit! Aut, dignissimos distinctio doloremque enim et omnis quasi? Aliquid animi at blanditiis cumque delectus dolore dolorem dolores eaque eos esse explicabo harum illum impedit, inventore ipsa itaque iusto laboriosam, laborum magnam magni maiores modi molestiae nam officiis pariatur perspiciatis quas quasi ratione reiciendis repellendus reprehenderit repudiandae, sapiente sequi tempore ullam unde voluptatibus! Asperiores consectetur id iste magni unde. Aliquid eveniet facilis fuga, pariatur quia repellat suscipit! Est hic iste itaque iure odit quaerat sapiente. Adipisci aperiam ea earum laboriosam magnam modi non officiis, veritatis voluptates? A atque autem, dolorum rem voluptate voluptatum. Commodi dignissimos doloribus eum inventore voluptatibus! Ad aut distinctio ea fugit laboriosam odit reiciendis totam veritatis voluptas voluptate. Ab aliquam aspernatur autem commodi, cumque delectus dicta distinctio ea expedita itaque pariatur qui repellat similique ullam ut voluptas voluptatibus? Consequuntur distinctio dolor eaque, eligendi est eveniet fuga, laborum magnam nihil numquam ratione, rerum totam vitae! Cupiditate pariatur perferendis perspiciatis quas sapiente veniam. Adipisci amet aperiam architecto commodi consequatur consequuntur cupiditate dolorum eos error et eum excepturi explicabo, id impedit ipsa laboriosam minima mollitia nemo nobis non odio perferendis placeat possimus praesentium quisquam repellendus saepe voluptate. Accusantium impedit inventore sint. Accusantium adipisci beatae commodi consectetur distinctio fuga harum illo ipsa magnam, molestiae mollitia non numquam quo ratione rem rerum vel voluptas voluptatibus. A, aperiam architecto atque aut commodi corporis dolores ducimus, eaque eius error et eum facere iure, maxime nisi nobis odit omnis possimus quaerat quasi qui quis ratione reprehenderit rerum sapiente sed sequi suscipit tenetur ullam unde velit voluptas voluptate voluptatum. Adipisci alias aut autem consequatur consequuntur debitis delectus deleniti dicta dolorem exercitationem fuga harum in incidunt iure magnam necessitatibus nesciunt nihil nisi nostrum nulla, pariatur quidem quod ratione repellat reprehenderit tenetur, voluptas voluptatem! Animi aspernatur facilis provident sunt totam. A amet, aperiam asperiores deleniti, distinctio explicabo fuga maiores nesciunt nihil optio quaerat reiciendis vel vitae. At debitis, dolores id ipsum libero quidem repudiandae. Dolores expedita facere, incidunt nisi nobis quae quo sequi! A ad autem commodi, cupiditate dolorem, explicabo inventore ipsam ipsum laudantium magnam maiores nisi quae recusandae suscipit, ut! Dolorum in laboriosam molestiae quos rem, reprehenderit sit ullam? Accusamus adipisci amet cumque dolor doloremque earum error explicabo magni, minima pariatur, quis quo quos rem ullam ut velit, vero. Accusamus aliquam consequatur culpa eius enim, eos error explicabo non nulla numquam officiis quasi sequi tempora velit vero. Id rem sequi soluta sunt voluptas? Asperiores dicta dignissimos dolor excepturi facere impedit itaque, labore necessitatibus officiis, omnis pariatur rerum, similique vero. Aliquid architecto atque deleniti eligendi eveniet excepturi minus, molestiae omnis, possimus qui reiciendis, sint tempora temporibus totam.</div>
-    );
+interface ICountryInterface {
+    id: number,
+    label: string,
+    dial_code: string,
+    code: string
 }
+
+
+const PhoneInput: React.FC = () => {
+    // http://www.geonames.org/flags/x/np.gif
+
+
+    const location: ICountryInterface[] = [
+        {
+            id: 1,
+            label: "Afghanistan",
+            dial_code: "+93",
+            code: "AF"
+        },
+        {
+            id: 2,
+            label: "Aland Islands",
+            dial_code: "+358",
+            code: "AX"
+        },
+        {
+            id: 3,
+            label: "Albania",
+            dial_code: "+355",
+            code: "AL"
+        },
+    ];
+
+
+    return (
+        <PhoneContainer>
+            <CSelect
+                classNamePrefix="select"
+                options={location}
+            />
+            <Input/>
+
+            <div></div>
+        </PhoneContainer>
+    );
+};
 
 export default PhoneInput;
