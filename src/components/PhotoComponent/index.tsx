@@ -19,7 +19,7 @@ const PhotoComp: React.FC<{ photo: Photo }> = ({ photo }) => {
       <img
         style={{ width: "300px", height: "300px", objectFit: "cover" }}
         src={urls.regular}
-        alt="search image"
+        alt="searched images"
       />
     </Fragment>
   );
