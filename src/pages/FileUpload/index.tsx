@@ -2,6 +2,7 @@ import { AnyMxRecord } from "dns";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
+import { ImageUpload } from "assets/images";
 
 const getColor = (props: any) => {
   if (props.isDragAccept) {
@@ -13,7 +14,7 @@ const getColor = (props: any) => {
   if (props.isFocused) {
     return "#2196f3";
   }
-  return "#eeeeee";
+  return "#0C7B93";
 };
 
 const Container = styled.div`
@@ -26,13 +27,14 @@ const Container = styled.div`
   height: 200px;
   padding: 20px;
   border-width: 2px;
-  border-radius: 2px;
+  border-radius: 30px;
   border-color: ${(props) => getColor(props)};
   border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
+  background-color: #00a8cc1f;
+  color: #000000;
   outline: none;
   margin-bottom: 50px;
+  margin-top: 20%;
   transition: border 0.24s ease-in-out;
 `;
 
@@ -55,8 +57,16 @@ function FileUpload(props: any) {
   return (
     <div className="container">
       <Container {...getRootProps({ isFocused, isDragAccept, isDragReject })}>
-        <div {...getRootProps({ className: "dropzone" })}>
+        <div
+          {...getRootProps({ className: "dropzone" })}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <input {...getInputProps()} />
+          <img style={{ width: "50px", height: "50px" }} src={ImageUpload} />
           <p>Drag 'n' drop some files here, or click to select files</p>
         </div>
       </Container>

@@ -7,12 +7,11 @@ export const LayoutWrapper = styled.div`
 
 export const ChildrenWrapper = styled.div`
   margin-left: 250px;
-  padding: 20px;
   width: 100vw;
   height: 100vh;
 `
 export const ContentWrapper = styled.div`
-
+padding: 20px;
   margin: auto;
   display: flex;
   flex: 1;

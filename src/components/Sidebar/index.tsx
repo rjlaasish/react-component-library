@@ -68,6 +68,22 @@ const Sidebar = () => {
             })}
         </NavWrapper>
       </Scrollbars>
+      <div
+        style={{
+          width: "100%",
+          height: "30px",
+          backgroundColor: "#142850 ",
+          fontSize: "12px",
+          letterSpacing: "1px",
+          display: "flex",
+          position: "absolute",
+          bottom: "0px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        &#xA9; Aasish Rijal{" "}
+      </div>
     </Nav>
   );
 };

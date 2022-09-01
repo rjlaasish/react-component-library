@@ -7,7 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const AutoComplete: React.FC = () => {
   const [data, setPhotosResponse] = useState<any>();
-  const [loaded, setLoaded] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const api = createApi({
     accessKey: "nyiAJtSncbiwRY-7cd63yYq23qW6fImQJ090-8CwOac",
   });
@@ -17,12 +17,13 @@ const AutoComplete: React.FC = () => {
 
   useEffect(() => {
     if (label) {
-      setLoaded(true);
+      setLoading(true);
+      setPhotosResponse([]);
       api.search
         .getPhotos({ query: label })
         .then((result) => {
           setPhotosResponse(result);
-          setLoaded(false);
+          setLoading(false);
         })
         .catch(() => {
           console.log("something went wrong!");
@@ -74,7 +75,8 @@ const AutoComplete: React.FC = () => {
           gap: "15px",
         }}
       >
-        {data &&
+        {!loading &&
+          data &&
           data.response.results.map((photo: any) => (
             <div style={{ display: "flex" }}>
               <PhotoComponent photo={photo} />
@@ -85,8 +87,7 @@ const AutoComplete: React.FC = () => {
           <img src="https://imgs.search.brave.com/6j7rv97jqXsk6vIs42Qrdd7TE8QsiqBYsB_4KpibuPY/rs:fit:480:270:1/g:ce/aHR0cHM6Ly9tZWRp/YTIuZ2lwaHkuY29t/L21lZGlhLzNvRnpt/cTZLajR5WFpVVkht/RS9naXBoeS5naWY.gif" />
         )}
         {label &&
-          !loaded &&
-          !data &&
+          loading &&
           [1, 2, 3, 4, 5, 6].map((i) => <Skeleton width={300} height={300} />)}
       </div>
     </div>
