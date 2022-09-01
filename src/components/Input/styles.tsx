@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-interface CInput {
-  isClearable: boolean;
-}
 
 export const CInput = styled.input`
   height: 38px;

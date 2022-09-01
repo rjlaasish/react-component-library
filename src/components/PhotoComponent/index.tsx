@@ -1,4 +1,4 @@
-import React, {  Fragment} from "react";
+import React, { Fragment } from "react";
 type Photo = {
   id: number;
   width: number;
@@ -13,13 +13,13 @@ type Photo = {
 
 const PhotoComp: React.FC<{ photo: Photo }> = ({ photo }) => {
   const { urls } = photo;
-  console.log(photo);
 
   return (
     <Fragment>
       <img
         style={{ width: "300px", height: "300px", objectFit: "cover" }}
         src={urls.regular}
+        alt="search image"
       />
     </Fragment>
   );
