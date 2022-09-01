@@ -9,7 +9,6 @@ import {
 } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import L from "leaflet";
-// import "leaflet-draw/dist/leaflet.draw.css";
 
 let DefaultIcon = L.icon({
   iconUrl:
