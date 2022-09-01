@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useEffect, useState } from "react";
+import React, {  Fragment} from "react";
 type Photo = {
   id: number;
   width: number;
@@ -12,7 +12,7 @@ type Photo = {
 };
 
 const PhotoComp: React.FC<{ photo: Photo }> = ({ photo }) => {
-  const { user, urls } = photo;
+  const { urls } = photo;
   console.log(photo);
 
   return (

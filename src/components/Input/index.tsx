@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import {InputContainer, CInput, ClearIcon, ClearFontAwesomeIcon} from "./styles";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";

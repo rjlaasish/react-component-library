@@ -12,7 +12,7 @@ const AutoComplete: React.FC = () => {
     accessKey: "nyiAJtSncbiwRY-7cd63yYq23qW6fImQJ090-8CwOac",
   });
 
-  const [{ label, ...rest }, setValue] = useState<{ [x: string]: any }>({});
+  const [{ label }, setValue] = useState<{ [x: string]: any }>({});
   const GOOGLE_PLACES_API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const AutoComplete: React.FC = () => {
           console.log("something went wrong!");
         });
     }
-  }, [label]);
+  }, [label,api.search]);
 
   return (
     <div
@@ -84,7 +84,7 @@ const AutoComplete: React.FC = () => {
           ))}
 
         {!label && (
-          <img src="https://imgs.search.brave.com/6j7rv97jqXsk6vIs42Qrdd7TE8QsiqBYsB_4KpibuPY/rs:fit:480:270:1/g:ce/aHR0cHM6Ly9tZWRp/YTIuZ2lwaHkuY29t/L21lZGlhLzNvRnpt/cTZLajR5WFpVVkht/RS9naXBoeS5naWY.gif" />
+          <img src="https://imgs.search.brave.com/6j7rv97jqXsk6vIs42Qrdd7TE8QsiqBYsB_4KpibuPY/rs:fit:480:270:1/g:ce/aHR0cHM6Ly9tZWRp/YTIuZ2lwaHkuY29t/L21lZGlhLzNvRnpt/cTZLajR5WFpVVkht/RS9naXBoeS5naWY.gif" alt="gif of search above"/>
         )}
         {label &&
           loading &&

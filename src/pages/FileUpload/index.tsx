@@ -1,4 +1,3 @@
-import { AnyMxRecord } from "dns";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
@@ -66,7 +65,7 @@ function FileUpload(props: any) {
           }}
         >
           <input {...getInputProps()} />
-          <img style={{ width: "50px", height: "50px" }} src={ImageUpload} />
+          <img style={{ width: "50px", height: "50px" }} src={ImageUpload} alt="drag file zone"/>
           <p>Drag 'n' drop some files here, or click to select files</p>
         </div>
       </Container>

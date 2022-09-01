@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useState} from 'react';
 import {CountryFlag, DropDownListContainer, ListItem, SelectButton, SelectContainer} from "./styles";
 
 
@@ -18,30 +18,7 @@ interface ICountryInterface {
 
 
 const Select = ({title,options}: ISelectProps) => {
-        const [location, setLocation] = useState<ICountryInterface[]>([
-            {
-                id: 1,
-                name: "Afghanistan",
-                dial_code: "+93",
-                selected: false,
-                code: "AF"
-            },
-            {
-                id: 2,
-                name: "Aland Islands",
-                dial_code: "+358",
-                selected: false,
-                code: "AX"
-            },
-            {
-                id: 3,
-                name: "Albania",
-                dial_code: "+355",
-                selected: false,
-                code: "AL"
-            },
-        ]);
-        const dropdownRef = useRef();
+      
         const [selectedOption, setSelectedOption] = useState<ICountryInterface>();
         const [isListOpen, setIsListOpen] = useState(false);
         const [headerTitle, setHeaderTitle] = useState(title);
@@ -49,7 +26,7 @@ const Select = ({title,options}: ISelectProps) => {
             setIsListOpen(!isListOpen)
         }
 
-        const onBLur={}
+        
 
         const selectItem = (item: ICountryInterface) => {
 

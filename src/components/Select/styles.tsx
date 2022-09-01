@@ -63,9 +63,6 @@ export const DropDownContainer = styled("div")`
   margin: 0 auto;
 `;
 
-interface IHeaderProps {
-    ref: any;
-}
 
 export const DropDownListContainer = styled("div")`
   position: absolute;
