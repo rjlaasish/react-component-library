@@ -24,7 +24,14 @@ function Layout({ children }: ILayoutProps) {
             color: "#fff",
           }}
         >
-          If you find this useful please support by giving a ⭐ star on github
+          If you find this useful please support by giving a ⭐{" "}
+          <a
+            style={{ textDecoration: "none", color: "yellow" }}
+            href="https://github.com/rjlaasish/react-component-library"
+            target="_"
+          >
+            star on github
+          </a>
         </div>
         <ContentWrapper>{children}</ContentWrapper>
       </ChildrenWrapper>
