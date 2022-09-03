@@ -8,7 +8,7 @@ export const StyledButton = styled.button`
   border: none;
   color: #ffffff;
   font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   font-weight: 500;
 `
