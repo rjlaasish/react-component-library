@@ -30,6 +30,12 @@ const PasswordStrength = React.lazy(() =>
     default: PasswordStrength,
   }))
 );
+
+const HCaptcha = React.lazy(() =>
+  import("./pages").then(({ HCaptcha }) => ({
+    default: HCaptcha,
+  }))
+);
 interface IRouteChildItems {
   name: string;
   path: string;
@@ -100,5 +106,11 @@ export const routes: IRouteItems[] = [
     path: "/password-validator",
     component: PasswordStrength,
     navbar: "Password Validator",
+  },
+  {
+    // enabled: true,
+    path: "/h-captcha",
+    component: HCaptcha,
+    navbar: "HCaptcha",
   },
 ];
