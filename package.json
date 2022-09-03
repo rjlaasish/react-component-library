@@ -1,5 +1,5 @@
 {
-  "homepage":".",
+  "homepage": ".",
   "name": "react-component-library",
   "version": "0.1.0",
   "private": true,
@@ -8,6 +8,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@hcaptcha/react-hcaptcha": "^1.4.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",

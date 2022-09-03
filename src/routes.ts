@@ -24,6 +24,12 @@ const Map = React.lazy(() =>
 const FileUpload = React.lazy(() =>
   import("./pages").then(({ FileUpload }) => ({ default: FileUpload }))
 );
+
+const PasswordStrength = React.lazy(() =>
+  import("./pages").then(({ PasswordStrength }) => ({
+    default: PasswordStrength,
+  }))
+);
 interface IRouteChildItems {
   name: string;
   path: string;
@@ -88,5 +94,11 @@ export const routes: IRouteItems[] = [
     path: "/file-upload",
     component: FileUpload,
     navbar: "File Upload",
+  },
+  {
+    // enabled: true,
+    path: "/password-validator",
+    component: PasswordStrength,
+    navbar: "Password Validator",
   },
 ];
