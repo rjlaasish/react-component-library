@@ -1,18 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faPlus,
+  faXmark,
+  faFileCsv,
+} from "@fortawesome/free-solid-svg-icons";
+import faker from "faker";
+
+interface ITableProps extends Record<string, any> {
+  headerText: string;
+  columnName: string;
+  sortable: boolean;
+  searchable: boolean;
+  exportable: boolean;
+}
 
 function EditableTable() {
-  const columnHeader = ["Name", "Age", "Gender", ""];
-  const [data, setData] = useState([
-    { name: "Anom", age: "19", gender: "Male" },
-    { name: "Megha", age: "19", gender: "Female" },
-    { name: "Subham", age: "25", gender: "Male" },
-  ]);
+  const columnHeaders = ["Name", "Age", "Gender"];
+  const [data, setData] = useState<
+    { name: string; age: string; gender: string }[]
+  >([]);
   const [addDataState, setAddDataState] = useState(false);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+
+  const columns: ITableProps[] = [];
+  columnHeaders.forEach((columnHeader) => {
+    columns.push({
+      headerText: columnHeader,
+      columnName: columnHeader.toLowerCase().replace(/\s/g, ""),
+      sortable: true,
+      searchable: true,
+      exportable: true,
+    });
+  });
+  columns.push({
+    headerText: "",
+    columnName: "",
+    sortable: false,
+    searchable: false,
+    exportable: false,
+  });
+
+  useEffect(() => {
+    const arrToLoad: { name: string; age: string; gender: string }[] = [];
+    [1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => {
+      const newData = {
+        name: faker.name.firstName(),
+        age: faker.random.number(50).toString(),
+        gender: faker.name.gender(),
+      };
+      arrToLoad.push(newData);
+    });
+    setData(arrToLoad);
+  }, []);
 
   const handleAddClick = () => {
     // setData([{name: '', age: 0, gender: ''}, ...data,]);
@@ -36,6 +79,30 @@ function EditableTable() {
     }
   };
 
+  const handleExport = () => {
+    const exportableColumns = columns.filter((c) => c.exportable);
+
+    let csv = "";
+    exportableColumns.forEach(({ headerText }) => (csv += headerText + ","));
+    csv = csv.slice(0, csv.length - 1) + "\n";
+
+    data.forEach((d) => {
+      let rowData = "";
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      // exportableColumns.forEach(
+      //   ({ columnName }) => (rowData += `${d[columnName]} ,`)
+      // );
+      csv += rowData.slice(0, rowData.length - 1) + "\n";
+    });
+
+    const link = document.createElement("a");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "export.csv");
+    link.click();
+  };
+
   return (
     <div
       style={{
@@ -44,24 +111,45 @@ function EditableTable() {
         alignItems: "flex-end",
       }}
     >
-      <button
-        style={{
-          width: "70px",
-          outline: "none",
-          padding: "10px 10px",
-          borderRadius: "5px",
-          backgroundColor: "#142850",
-          border: "none",
-          color: "#ffffff",
-          fontSize: "14px",
-          cursor: "pointer",
-          fontWeight: "500",
-        }}
-        onClick={handleAddClick}
-        disabled={addDataState}
-      >
-        Add <FontAwesomeIcon icon={faPlus} />
-      </button>
+      <div>
+        <button
+          style={{
+            width: "130px",
+            outline: "none",
+            padding: "10px 10px",
+            borderRadius: "5px",
+            backgroundColor: "#27496D",
+            border: "none",
+            color: "#ffffff",
+            fontSize: "14px",
+            cursor: "pointer",
+            fontWeight: "500",
+            marginRight: "10px",
+          }}
+          onClick={handleExport}
+        >
+          Export Report{" "}
+          <FontAwesomeIcon style={{ marginLeft: "5px" }} icon={faFileCsv} />
+        </button>
+        <button
+          style={{
+            width: "70px",
+            outline: "none",
+            padding: "10px 10px",
+            borderRadius: "5px",
+            backgroundColor: "#142850",
+            border: "none",
+            color: "#ffffff",
+            fontSize: "14px",
+            cursor: "pointer",
+            fontWeight: "500",
+          }}
+          onClick={handleAddClick}
+          disabled={addDataState}
+        >
+          Add <FontAwesomeIcon icon={faPlus} />
+        </button>
+      </div>
       <table
         style={{
           borderCollapse: "collapse",
@@ -80,8 +168,8 @@ function EditableTable() {
               textAlign: "center",
             }}
           >
-            {columnHeader.map((header, idx) => (
-              <th style={{ padding: "12px 15px" }}>{header}</th>
+            {columns.map((header, idx) => (
+              <th style={{ padding: "12px 15px" }}>{header.columnName}</th>
             ))}
           </tr>
         </thead>
