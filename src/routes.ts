@@ -13,8 +13,8 @@ const AutoComplete = React.lazy(() =>
   import("./pages").then(({ AutoComplete }) => ({ default: AutoComplete }))
 );
 
-const EditableTable = React.lazy(() =>
-  import("./pages").then(({ EditableTable }) => ({ default: EditableTable }))
+const Table = React.lazy(() =>
+  import("./pages").then(({ Table }) => ({ default: Table }))
 );
 
 const Map = React.lazy(() =>
@@ -34,6 +34,12 @@ const PasswordStrength = React.lazy(() =>
 const ReCaptcha = React.lazy(() =>
   import("./pages").then(({ ReCaptcha }) => ({
     default: ReCaptcha,
+  }))
+);
+
+const AdBlocker = React.lazy(() =>
+  import("./pages").then(({ AdBlocker }) => ({
+    default: AdBlocker,
   }))
 );
 interface IRouteChildItems {
@@ -91,9 +97,19 @@ export const routes: IRouteItems[] = [
   },
   {
     // enabled: true,
-    path: "/editable-table",
-    component: EditableTable,
-    navbar: "Editable Table",
+    path: "/table/*",
+    component: Table,
+    navbar: "Table",
+    child: [
+      {
+        name: "Basic Table",
+        path: "table/basic-table",
+      },
+      {
+        name: "Editable Table",
+        path: "/table",
+      },
+    ],
   },
   {
     // enabled: true,
@@ -112,5 +128,11 @@ export const routes: IRouteItems[] = [
     path: "/re-captcha",
     component: ReCaptcha,
     navbar: "ReCaptcha",
+  },
+  {
+    // enabled: true,
+    path: "/ad-blocker",
+    component: AdBlocker,
+    navbar: "AdBlocker Detection",
   },
 ];
