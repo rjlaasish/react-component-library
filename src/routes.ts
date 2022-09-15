@@ -103,11 +103,11 @@ export const routes: IRouteItems[] = [
     child: [
       {
         name: "Basic Table",
-        path: "table/basic-table",
+        path: "table",
       },
       {
         name: "Editable Table",
-        path: "/table",
+        path: "table/editable-table",
       },
     ],
   },

@@ -8,3 +8,4 @@ export {default as FileUpload } from './FileUpload';
 export {default as PasswordStrength } from './PasswordStrength';
 export {default as ReCaptcha } from './ReCaptcha';
 export {default as AdBlocker } from './AdBlocker';
+export {default as BasicTable } from './Table/BasicTable';

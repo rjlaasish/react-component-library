@@ -1,80 +1,118 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import styled from "styled-components";
-import { ImageUpload } from "assets/images";
+import { imageUpload } from "assets/images";
+import { BasicTable } from "pages";
+import {
+  FilePickerContainer,
+  FilePickerImage,
+  PreviewImage,
+  Tr,
+  Wrapper,
+  Container,
+} from "./styles";
 
-const getColor = (props: any) => {
-  if (props.isDragAccept) {
-    return "#00e676";
+interface Row {
+  path: string;
+  size: string;
+  preview: any;
+}
+
+const FileUpload = () => {
+  const [dataToShow, setData] = useState<any[]>([]);
+
+  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
+    useDropzone({
+      onDrop: (acceptedFiles) => {
+        setData([
+          ...dataToShow,
+          ...acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          ),
+        ]);
+      },
+    });
+
+  interface ITableProps extends Record<string, any> {
+    headerText: string;
+    columnName: string;
+    sortable: boolean;
+    searchable: boolean;
+    exportable: boolean;
   }
-  if (props.isDragReject) {
-    return "#ff1744";
-  }
-  if (props.isFocused) {
-    return "#2196f3";
-  }
-  return "#0C7B93";
-};
 
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 500px;
-  height: 200px;
-  padding: 20px;
-  border-width: 2px;
-  border-radius: 30px;
-  border-color: ${(props) => getColor(props)};
-  border-style: dashed;
-  background-color: #00a8cc1f;
-  color: #000000;
-  outline: none;
-  margin-bottom: 50px;
-  margin-top: 20%;
-  transition: border 0.24s ease-in-out;
-`;
+  const columnHeaders = ["File Name", "Size", "Preview"];
 
-function FileUpload(props: any) {
-  const {
-    acceptedFiles,
-    getRootProps,
-    getInputProps,
-    isFocused,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone();
+  const columns: ITableProps[] = [];
 
-  const files: any = acceptedFiles.map((file: any) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
+  columnHeaders.forEach((columnHeader) => {
+    columns.push({
+      headerText: columnHeader,
+      columnName: columnHeader.toLowerCase().replace(/\s/g, ""),
+      sortable: true,
+      searchable: true,
+      exportable: true,
+    });
+  });
+
+  const getAmount = (amount: number): string => {
+    if (amount < 0) {
+      return "0B";
+    }
+    if (amount < 1024) {
+      return `${amount}B`;
+    }
+    if (amount < 1048576) {
+      return `${Math.round(amount / 1024)}KB`;
+    }
+    if (amount < 1073741824) {
+      return `${Math.round(amount / 1048576)}MB`;
+    }
+    return `${Math.round(amount / 1073741824)}GB`;
+  };
+
+  const tableDataMap = (row: Row, index: number): React.ReactChild => {
+    return (
+      <Tr key={index}>
+        <td>{row.path}</td>
+        <td>{getAmount(parseInt(row.size))}</td>
+        <td>
+          <PreviewImage
+            src={row.preview}
+            // Revoke data uri after image is loaded
+            onLoad={() => {
+              URL.revokeObjectURL(row.preview);
+            }}
+          />
+        </td>
+      </Tr>
+    );
+  };
 
   return (
-    <div className="container">
-      <Container {...getRootProps({ isFocused, isDragAccept, isDragReject })}>
-        <div
-          {...getRootProps({ className: "dropzone" })}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
+    <Wrapper>
+      <Container
+        {...getRootProps({ isFocused, isDragAccept, isDragReject })}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <FilePickerContainer {...getRootProps({ className: "dropzone" })}>
           <input {...getInputProps()} />
-          <img style={{ width: "50px", height: "50px" }} src={ImageUpload} alt="drag file zone"/>
+          <FilePickerImage src={imageUpload} alt="drag file zone" />
           <p>Drag 'n' drop some files here, or click to select files</p>
-        </div>
+        </FilePickerContainer>
       </Container>
-      <aside>
-        <h4>{files && <span>Files</span>}</h4>
-        <ul>{files}</ul>
-      </aside>
-    </div>
+      <div>
+        {dataToShow.length > 0 && (
+          <BasicTable
+            columns={columns}
+            data={dataToShow}
+            tableDataMap={tableDataMap}
+          />
+        )}
+      </div>
+    </Wrapper>
   );
-}
+};
 
 export default FileUpload;
